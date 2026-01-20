@@ -12,7 +12,7 @@ def generate_report(resume, job_desc):
         raise RuntimeError("GROQ_API_KEY not found. Check your .env file.")
 
     client = Groq(api_key=api_key)
-
+    #just load the prompts
     prompt_path = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
         "prompts",
@@ -26,7 +26,7 @@ def generate_report(resume, job_desc):
        resume = resume[:8000],
        job_desc = job_desc[:4000]
     )
-
+    #send to groq_api
     response = client.chat.completions.create(
         model="openai/gpt-oss-120b",
         messages=[{"role": "user", "content": prompt}],
